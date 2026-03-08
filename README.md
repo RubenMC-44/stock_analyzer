@@ -12,7 +12,7 @@ NumPy, Pandas, yFinance and Matplotlib.
 ## Installation
 Clone the repository, create a virtual environment and install the dependencies:
 
-- git clone https://github.com/tu-usuario/stock-analyzer
+- git clone https://github.com/RubenMC-44/stock-analyzer
 - cd stock-analyzer. 
 - Create a new virtual environment python -m venv "name"
 - pip install -r requirements.txt
