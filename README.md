@@ -3,7 +3,7 @@
 ## Description
 Project developed to quickly perform a simple analysis of stock market assets, 
 through key financial metrics that show price evolution, comparisons, 
-drawdowns and risk-adjusted return ratios. | WORK in progress | roadmap at the bottom 
+drawdowns and risk-adjusted return ratios. | WORK in progress | roadmap at the bott om 
 
 ## Technologies
 The project has been fully developed in Python, using the following libraries:
@@ -12,11 +12,11 @@ NumPy, Pandas, yFinance and Matplotlib.
 ## Installation
 Clone the repository, create a virtual environment and install the dependencies:
 
-- git clone https://github.com/RubenMC-44/stock-analyzer
-- cd stock-analyzer. 
-- Create a new virtual environment python -m venv "name"
-- pip install -r requirements.txt
-- python main.py
+git clone https://github.com/RubenMC-44/stock-analyzer
+cd stock-analyzer
+Create a new virtual environment python -m venv "name"
+pip install -r requirements.txt
+python main.py
 
 ## Usage
 The project must be launched from main.py. Once executed, it will prompt 
