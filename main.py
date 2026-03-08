@@ -19,5 +19,7 @@ if result is not None:
     print(f"Simplify Sharpe Ratio: {simplified_sharpe_ratio(result):.2f}")
     plot_price_history(result,stock_name.upper())
 else: 
+    print("----------")
     print("No data found for that ticker.")
+    print("----------")
 
