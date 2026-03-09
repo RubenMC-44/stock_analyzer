@@ -12,7 +12,7 @@ if result is not None:
     print(f"--- {stock_name.upper()} Analysis---")
     #Result of first function of rentability
     print(f"Total return: {total_return(result):.2f}%")
-    #Result of the annual volatility (debo cambiarlo luego)
+    #Result of the annual volatility
     print(f"Annualized volatility: {annualized_volatility(result):.2f}%")
     #Here is the result of the calculacion of the biggest price drop
     print(f"Max Drawdown: {max_drawdown(result):.2f}%")
