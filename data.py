@@ -13,8 +13,8 @@ def get_stock_data (ticker, period = "1y"):
         else: 
             return df
         
-#We use the except, to avoid the crash and show the message instead      
+#We use the except, to avoid the crash, show the message instead      
     except Exception as e: 
         print(f"ERROR: Ticker '{ticker}' not found {e}")
         return None
-
+##Check hwo to make it look clean##

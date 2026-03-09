@@ -5,7 +5,7 @@ from display import plot_price_history
 
 
 ##FIRST OF ALL, we need the name of the ticker to analize. 
-stock_name = input("Introduce the name of the active that you would like to "": ")
+stock_name = input("Introduce the name of the active that you would like to analyze: ")
 result = get_stock_data(stock_name.upper())
 
 if result is not None: 
