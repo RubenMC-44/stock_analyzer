@@ -14,3 +14,13 @@ def plot_price_history (df,ticker):
 
     plt.legend()
     plt.show() 
+
+def plot_drawdown_series (drawdown_series, ticker):
+    plt.figure(figsize=(10, 4))
+    plt.plot(drawdown_series.index, drawdown_series, color='r', label='Drawdown')
+    plt.fill_between(drawdown_series.index, drawdown_series, 0, alpha=0.3, color='r')
+    plt.title(f'Drawdown History {ticker}')
+    plt.xlabel('Date')
+    plt.ylabel('Drawdown %')
+    plt.legend()
+    plt.show()

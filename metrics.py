@@ -43,7 +43,16 @@ def simplified_sharpe_ratio (df):
     risk-adjusted returns without taking on excessive volatility'''
     return ((total_return(df) *0.01) / (annualized_volatility(df)*0.01)) #It must be on the same scale, not on porcentage, this is whhy we multiply for 0.01
 
+def Drawdown_Series (df):
+    """
+    Calculates the Maximum Drawdown (MDD), which measures the largest 
+    peak-to-trough decline in the asset's value, but in this case we use a serie to graphic it.
+    """ 
+    rolling_max_series = df ["Close"].cummax()    
     
+    drawdown_series = ((df["Close"]- rolling_max_series ) / rolling_max_series) * 100 
+    
+    return drawdown_series
 
 
 
