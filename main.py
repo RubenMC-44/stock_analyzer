@@ -1,6 +1,6 @@
 ## ENTRANCE POINT, THE PLACE THAT WE ARE GOING TO RECIEVE THE TICKER´S 
 from data import get_stock_data
-from metrics import total_return, annualized_volatility, max_drawdown, simplified_sharpe_ratio, Drawdown_Series
+from metrics import total_return, annualized_volatility, max_drawdown, simplified_sharpe_ratio
 import pandas as pd 
 
 ##FIRST OF ALL, we need the name of the ticker to analize. 
@@ -23,6 +23,7 @@ def download_newData(metrics_data_list):
     df_tickers = pd.DataFrame(metrics_data_list)
     df_tickers.to_csv("Data_Tickers.csv", index=False)
 
+#To unly runs when we are actually on the file. Otherwise NO. 
 if __name__ == "__main__":
     stock_name = input("Introduce the name of the stocks: ")
     stock_names = stock_name.split(",")

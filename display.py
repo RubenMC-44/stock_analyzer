@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import plotly.express as px
 
-def plot_price_history (df,ticker):
+'''def plot_price_history (df,ticker):
     plt.plot(df.index,df["Close"],color = "r", label = "Close price")#Historical price line
     
     plt.plot(df.index,df["Close"].rolling(50).mean(),color= "b", label = "MA 50")#Dinamic line #Showing more clearly the trend 
@@ -24,7 +24,8 @@ def plot_drawdown_series (drawdown_series, ticker):
     plt.xlabel('Date')
     plt.ylabel('Drawdown %')
     plt.legend()
-    plt.show()
+    plt.show() 
+    '''
 
 #There is no goo sinergy between matplotlib and streamlit, so i would create new graphics for that part. Keeping the old one, being able to used 
 #trough the terminal. 
