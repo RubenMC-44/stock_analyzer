@@ -1,7 +1,8 @@
 import streamlit as st
 from main import startAnalysis
-from display import plot_price_history_streamlit, plot_drawdown_streamlit
+from display import plot_price_history_streamlit, plot_drawdown_streamlit, plot_signals_streamlit
 from metrics import Drawdown_Series
+from model import create_features, create_target, train_model
 import pandas as pd
 
 st.set_page_config(
@@ -80,6 +81,7 @@ def page1():
                         border=True
                     )
                     st.caption("higher is better")
+
                 fig_price = plot_price_history_streamlit( i["df"], i["Name"])
                 st.plotly_chart(fig_price, use_container_width=True)
 
@@ -98,7 +100,29 @@ def page1():
 
 
 def page2():
-    st.title("Predictions/Strategy")
+    st.title("Predictions sell/buy")
+    stock_name= st.text_input(
+        "Introduce the name of the stocks that you want to predict:👇"
+        )
+    stock_names = stock_name.split(",")
+    if st.button("Get Predictions", type="primary"):
+        results = startAnalysis(stock_names)
+        if stock_name == "":
+            st.warning('Necessary to introduce at least one stock to analyze')
+        elif results == []: 
+            st.warning(f'stock not found for "{stock_names[0].upper()}". Check if you write it correctly', icon="⚠️") 
+        else:
+            successful = [r["Name"] for r in results]
+            failed = [s.strip().upper() for s in stock_names if s.strip().upper() not in successful]
+            for ticker in failed:
+                st.warning(f"Ticker '{ticker}' not found. Check if you wrote it correctly.", icon="⚠️")
+        for i in results: 
+            df = create_target(i["df"])
+            df = create_features(i["df"])
+            model, signals, report = train_model(df)
+            df["Signal"] = signals
+            fig_signals = plot_signals_streamlit(df, i["Name"])
+            st.plotly_chart(fig_signals, use_container_width=True)
 
 
 st.title("STOCK ANALYZER")    

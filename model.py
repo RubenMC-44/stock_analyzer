@@ -3,14 +3,10 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
 from sklearn.ensemble import RandomForestClassifier
 
-df = get_stock_data("aapl")
-
 def create_target(df):
     df["Target"] = (df["Close"].shift(-1) > df["Close"]).astype(int)
     df.dropna(inplace=True)
     return df
-
-df = create_target(df)
 
 def create_features(df): 
     # Moving averages to identify trend direction
@@ -30,18 +26,27 @@ def create_features(df):
     df.dropna(inplace=True)
     return df
 
-df = create_features(df)
+def train_model(df): 
+    features =["MA50", "MA200", "RSI", "Volume"]
+    X = df[features]
+    Y = df["Target"]
+    x_train , x_test, y_train , y_test = train_test_split(X,Y, train_size= 0.8, random_state=42)
+    #------Random forest RandomForestClassifier-------------
+    model= RandomForestClassifier(class_weight="balanced")
+    model.fit(x_train,y_train)
+    y_pred_forest = model.predict(x_test)
+    signals = model.predict(X) #Creating signs with the whole target. In this case X
+    classification_report(y_test, y_pred_forest)
+    return model,signals, classification_report(y_test, y_pred_forest)
 
-features =["MA50", "MA200", "RSI", "Volume"]
-
-X = df[features]
-Y = df["Target"]
-
-x_train , x_test, y_train , y_test = train_test_split(X,Y, train_size= 0.80, random_state=42)
-
-#------Random forest RandomForestClassifier-------------
-model_forest= RandomForestClassifier(class_weight="balanced")
-model_forest.fit(x_train,y_train)
-
-y_pred_forest = model_forest.predict(x_test)
-print(classification_report(y_test, y_pred_forest))
+#The trys always need to come whit a if name, then we can check if all is working as expected
+if __name__ == "__main__":
+    stock_name = input("Introduce the name of the stocks: ")
+    df = stock_name
+    df = get_stock_data(df)
+    df = create_target(df)
+    df = create_features(df)
+    model, signals, report = train_model(df)
+    df["Signal"] = signals
+    print(df[["Close", "Signal"]].tail(10))
+    print(report)

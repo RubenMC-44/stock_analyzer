@@ -1,4 +1,3 @@
-import matplotlib.pyplot as plt
 import plotly.express as px
 
 '''def plot_price_history (df,ticker):
@@ -62,4 +61,22 @@ def plot_drawdown_streamlit(drawdown_series, ticker):
     
     fig.update_traces(line_color='red', fillcolor='rgba(255,0,0,0.2)')
     fig.update_layout(template='plotly_dark')
+    return fig
+
+
+def plot_signals_streamlit(df, ticker):
+    # Base price line
+    fig = px.line(df, x=df.index, y="Close", title=f"Buy/Sell Signals - {ticker}")
+    
+    # Buy signals (green dots)
+    buy = df[df["Signal"] == 1]
+    fig.add_scatter(x=buy.index, y=buy["Close"], mode="markers",
+                    marker=dict(color="green", size=8), name="Buy")
+    
+    # Sell signals (red dots)
+    sell = df[df["Signal"] == 0]
+    fig.add_scatter(x=sell.index, y=sell["Close"], mode="markers",
+                    marker=dict(color="red", size=8), name="Sell")
+    
+    fig.update_layout(template="plotly_dark")
     return fig
