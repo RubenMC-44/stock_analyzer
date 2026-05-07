@@ -4,10 +4,10 @@ from metrics import total_return, annualized_volatility, max_drawdown, simplifie
 import pandas as pd 
 
 ##FIRST OF ALL, we need the name of the ticker to analize. 
-def startAnalysis(stock_names):
+def startAnalysis(stock_names,select_period):
     metrics_data_list = []
     for i in stock_names: 
-        result = get_stock_data(i.strip().upper())
+        result = get_stock_data(i.strip().upper(),select_period)
         if result is not None: 
             metrics_data = {"Name": i.strip().upper(), "Total return": total_return(result), "Annualize volatility": annualized_volatility(result),
                             "Max Drawdown" : max_drawdown(result), "Simplify Sharpe Ratio" : simplified_sharpe_ratio(result) ,"df": result}
@@ -27,7 +27,8 @@ def download_newData(metrics_data_list):
 if __name__ == "__main__":
     stock_name = input("Introduce the name of the stocks: ")
     stock_names = stock_name.split(",")
-    results = startAnalysis(stock_names)
+    select_period = input("Select period (1y, 2y, 5y, 10y): ")
+    results = startAnalysis(stock_names,select_period)
     for ticker_data in results:
         print(ticker_data)
     download_newData(results)

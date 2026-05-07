@@ -2,6 +2,7 @@ from data import get_stock_data
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
 from sklearn.ensemble import RandomForestClassifier
+import pandas as pd
 
 def create_target(df):
     df["Target"] = (df["Close"].shift(-1) > df["Close"]).astype(int)
@@ -39,6 +40,10 @@ def train_model(df):
     classification_report(y_test, y_pred_forest)
     return model,signals, classification_report(y_test, y_pred_forest)
 
+def backtesting(df): 
+    df["Daily_return"] = df["Close"].pct_change()
+    return df
+
 #The trys always need to come whit a if name, then we can check if all is working as expected
 if __name__ == "__main__":
     stock_name = input("Introduce the name of the stocks: ")
@@ -48,5 +53,6 @@ if __name__ == "__main__":
     df = create_features(df)
     model, signals, report = train_model(df)
     df["Signal"] = signals
-    print(df[["Close", "Signal"]].tail(10))
+    df = backtesting(df)
+    print(print(df[["Close", "Signal", "Daily_return"]].head(10)))
     print(report)

@@ -18,8 +18,9 @@ def page1():
         "Introduce the name of the stocks:👇"
         )
     stock_names = stock_name.split(",")
+    select_period =  st.selectbox("Select period:", ["1y", "2y", "5y", "10y"])
     if st.button("Get info", type="primary"):
-        results = startAnalysis(stock_names)
+        results = startAnalysis(stock_names,select_period)
         if stock_name == "":
             st.warning('Necessary to introduce at least one stock to analyze')
         elif results == []: 
@@ -105,8 +106,9 @@ def page2():
         "Introduce the name of the stocks that you want to predict:👇"
         )
     stock_names = stock_name.split(",")
+    select_period =  st.selectbox("Select period:", ["1y", "2y", "5y", "10y"])
     if st.button("Get Predictions", type="primary"):
-        results = startAnalysis(stock_names)
+        results = startAnalysis(stock_names,select_period)
         if stock_name == "":
             st.warning('Necessary to introduce at least one stock to analyze')
         elif results == []: 
