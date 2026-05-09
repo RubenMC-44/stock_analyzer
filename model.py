@@ -42,6 +42,9 @@ def train_model(df):
 
 def backtesting(df): 
     df["Daily_return"] = df["Close"].pct_change()
+    df["Strategy_return"]= df["Daily_return"] * df["Signal"] # Combine the columns to know which signal works
+    df["Strategy_capital"] = 1000 * (1 + df["Strategy_return"]).cumprod() #This collumnd will follow the simplicity. First day you buy and you hold till last day.
+    df["BuyHold_capital"] = 1000 * (1 + df["Daily_return"]).cumprod() #More "complicate" stragety, will sell and buy following the signals, so will change everyday.
     return df
 
 #The trys always need to come whit a if name, then we can check if all is working as expected
@@ -54,5 +57,5 @@ if __name__ == "__main__":
     model, signals, report = train_model(df)
     df["Signal"] = signals
     df = backtesting(df)
-    print(print(df[["Close", "Signal", "Daily_return"]].head(10)))
+    print(df[["Close", "Signal", "Daily_return","Strategy_return","Strategy_capital","BuyHold_capital"]].head(10))
     print(report)

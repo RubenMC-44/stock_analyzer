@@ -80,3 +80,10 @@ def plot_signals_streamlit(df, ticker):
     
     fig.update_layout(template="plotly_dark")
     return fig
+
+
+def plot_backtest_streamlit(df, ticker):
+    fig = px.line(df, x=df.index, y=["Strategy_capital", "BuyHold_capital"],
+                title=f"Backtest vs Buy & Hold - {ticker}")
+    fig.update_layout(template="plotly_dark")
+    return fig

@@ -1,8 +1,8 @@
 import streamlit as st
 from main import startAnalysis
-from display import plot_price_history_streamlit, plot_drawdown_streamlit, plot_signals_streamlit
+from display import plot_price_history_streamlit, plot_drawdown_streamlit, plot_signals_streamlit, plot_backtest_streamlit
 from metrics import Drawdown_Series
-from model import create_features, create_target, train_model
+from model import create_features, create_target, train_model, backtesting
 import pandas as pd
 
 st.set_page_config(
@@ -123,8 +123,12 @@ def page2():
             df = create_features(i["df"])
             model, signals, report = train_model(df)
             df["Signal"] = signals
+            df = backtesting(df)          
             fig_signals = plot_signals_streamlit(df, i["Name"])
             st.plotly_chart(fig_signals, use_container_width=True)
+            fig_backtesting = plot_backtest_streamlit(df, i["Name"])
+            st.plotly_chart(fig_backtesting, use_container_width=True)
+
 
 
 st.title("STOCK ANALYZER")    

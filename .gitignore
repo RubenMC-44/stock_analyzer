@@ -1,4 +1,11 @@
+# Python
 __pycache__/
-.venv/
-.vscode/
 *.pyc
+.env
+venv/
+
+# Data files
+Data_Tickers.csv
+
+# VS Code
+.vscode/
