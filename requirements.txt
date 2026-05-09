@@ -27,7 +27,7 @@ mdurl==0.1.2
 multitasking==0.0.13
 narwhals==2.18.1
 numpy==2.4.3
-packaging @ file:///home/task_176104885106445/conda-bld/packaging_1761049078006/work
+packaging==24.2
 pandas==2.3.3
 peewee==4.0.5
 pillow==12.1.1
